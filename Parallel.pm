@@ -9,16 +9,18 @@ our @EXPORT = qw/subst/;
 sub subst
 {
     my $str = shift;
+    my $pos = 0;
     my @subs;
     while (@_) {
         push @subs, [ shift, shift ];
     }
     my $res;
     
-    while (length $str) {
+    while ($pos < length $str) {
         my (@bplus, @bminus, $best);
         for my $rref (@subs) {
-            if ($str =~ /^$rref->[0]/) {
+            pos $str = $pos;
+            if ($str =~ /\G$rref->[0]/) {
                 if ($+[0] > $bplus[0]) {
                     @bplus = @+;
                     @bminus = @-;
@@ -45,10 +47,11 @@ sub subst
                 croak 'Replacements must be strings or coderefs, not ' . 
                     ref($temp) . ' refs';
             }
-            substr($str, 0, $bplus[0], '');
+            $pos = $bplus[0];
         }
         else {
-            $res .= substr $str, 0, 1, '';
+            $res .= substr $str, $pos, 1;
+            $pos++;
         }
     }
     return $res;
