@@ -9,5 +9,4 @@ WriteMakefile(
 	NAME => 'Regexp::Subst::Parallel',
 	PM => { 'Parallel.pm' => '$(INST_LIBDIR)/Parallel.pm' },
 	PREREQ_PM => { },
-	VERSION => '0.11',
 );

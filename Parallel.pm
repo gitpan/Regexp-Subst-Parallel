@@ -6,6 +6,8 @@ use Carp;
 our @ISA = qw/Exporter/;
 our @EXPORT = qw/subst/;
 
+our $VERSION = 0.11;
+
 sub subst
 {
     my $str = shift;
@@ -64,7 +66,7 @@ in parallel.
     
 =head1 VERSION
 
-Regexp::Subst::Parallel version 0.10, Feb 9, 2003.
+Regexp::Subst::Parallel version 0.11, Feb 9, 2003.
 
 =head1 SYNOPSIS
 
